@@ -367,7 +367,6 @@
       overflow: hidden;
     }
 
-    /* 單件礦物詳細檢視：左圖右文並排 */
     .detail-header {
       display: flex;
       flex-wrap: wrap;
@@ -653,7 +652,7 @@
 
     .stage-workspace {
       display: grid;
-      grid-template-columns: 1.25fr 0.95fr;
+      grid-template-columns: 1.3fr 0.9fr;
       gap: 20px;
       align-items: start;
     }
@@ -723,16 +722,101 @@
     .clue-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       margin-top: 12px;
     }
 
     .clue-item {
-      background: rgba(15, 27, 48, 0.9);
+      background: rgba(15, 27, 48, 0.92);
       border-left: 3px solid var(--cyan);
       padding: 10px 12px;
       border-radius: 8px;
       font-size: 0.92rem;
+    }
+
+    .option-pool-box {
+      margin-top: 16px;
+      background: rgba(7, 13, 25, 0.8);
+      border: 1px solid rgba(234, 179, 8, 0.4);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .option-pool-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .option-pool-title {
+      font-size: 0.88rem;
+      color: #fde047;
+      font-weight: 700;
+    }
+
+    .selected-slots-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .selected-slot-pill {
+      background: #132340;
+      border: 1px dashed rgba(56, 189, 248, 0.55);
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 0.84rem;
+      color: #bae6fd;
+    }
+
+    .selected-slot-pill.filled {
+      border-style: solid;
+      border-color: var(--emerald);
+      background: rgba(16, 185, 129, 0.16);
+      color: #a7f3d0;
+      font-weight: 700;
+    }
+
+    .option-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px;
+    }
+
+    .choice-card {
+      background: #132340;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 10px;
+      padding: 9px 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-align: left;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .choice-card:hover {
+      background: #1c3460;
+      border-color: var(--gold);
+    }
+
+    .choice-code-badge {
+      display: inline-grid;
+      place-items: center;
+      min-width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #facc15, #eab308);
+      color: #09111f;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
     }
 
     .lock-screen {
@@ -798,22 +882,6 @@
 
     .key-btn.key-zero {
       grid-column: 1 / -1;
-    }
-
-    .char-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .char-chip-btn {
-      padding: 7px 11px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      background: #132340;
-      border: 1px solid rgba(234, 179, 8, 0.35);
-      color: #fef08a;
     }
 
     .lock-actions {
@@ -987,7 +1055,6 @@
   </header>
 
   <main class="container">
-    <!-- ==================== 視圖 1：礦物學習圖鑑總覽 ==================== -->
     <section id="galleryView" class="view-section active">
       <div class="textbook-banner">
         <div class="textbook-banner-head">
@@ -1023,7 +1090,6 @@
       <div id="galleryGrid" class="gallery-grid"></div>
     </section>
 
-    <!-- ==================== 視圖 2：單件礦物檢視（左圖右文） ==================== -->
     <section id="detailView" class="view-section">
       <div class="detail-header">
         <button id="backToGalleryBtn" class="btn-ghost" type="button">← 返回展示櫃</button>
@@ -1095,12 +1161,11 @@
       </div>
     </section>
 
-    <!-- ==================== 視圖 3：礦物密室逃脫挑戰 ==================== -->
     <section id="escapeView" class="view-section">
       <div id="escapeIntro" class="escape-setup-card">
         <h2>🔐 礦物實驗室：密室逃脫挑戰</h2>
         <p style="color:#cbd5e1; font-size:0.94rem;">
-          實驗室安全門已鎖上！請運用觀察力與課本知識解開所有密碼鎖。每位同學的<strong>關卡順序</strong>與<strong>密碼數字</strong>都會隨機產生，無法靠背別人的答案過關。
+          依序找出每條線索對應的<strong>答案選項</strong>，查看該選項前的<strong>數字編號</strong>，並在右側密碼鎖填入正確密碼即可解鎖。
         </p>
 
         <div class="form-grid">
@@ -1120,7 +1185,7 @@
 
         <ul class="rules-list">
           <li><strong>每關限時 2 分鐘（02:00）</strong>：倒數歸零會觸發全面封鎖失敗，必須重新開始。</li>
-          <li><strong>必須解鎖才能前往下一關</strong>：輸入正確密碼門鎖才會開啟；答錯會震動並扣 3 分。</li>
+          <li><strong>從答案選項挑出正確答案</strong>：依線索 1、線索 2、線索 3... 的順序點選答案選項，系統會自動帶入對應數字；答錯扣 3 分。</li>
           <li><strong>可隨時查閱隨身圖鑑</strong>：作答時可按「隨身圖鑑」對照礦物特徵與用途。</li>
         </ul>
 
@@ -1161,6 +1226,15 @@
 
             <div id="stageSpecimens" class="triple-specimens" style="display:none;"></div>
             <div id="stageClues" class="clue-list"></div>
+
+            <div class="option-pool-box">
+              <div class="option-pool-head">
+                <div class="option-pool-title">答案選項池（請依線索順序點選正確答案，取得對應密碼數字）：</div>
+                <button id="undoChoiceBtn" class="btn-ghost" type="button" style="padding:4px 10px; font-size:0.8rem;">↩ 退回上一格</button>
+              </div>
+              <div id="selectedSlotsBar" class="selected-slots-bar"></div>
+              <div id="optionCardsGrid" class="option-cards-grid"></div>
+            </div>
           </div>
 
           <div class="lock-panel">
@@ -1172,7 +1246,6 @@
             </div>
 
             <div id="numKeypad" class="keypad-num"></div>
-            <div id="charKeypad" class="char-chips" style="display:none;"></div>
 
             <div class="lock-actions">
               <button id="clearLockBtn" class="btn-ghost" type="button">清除重填</button>
@@ -1250,7 +1323,6 @@ function doPost(e) {
     (function () {
       "use strict";
 
-      /* ==================== 礦物資料庫（中英對照 + 建議圖檔路徑） ==================== */
       const MINERALS_DB = [
         {
           id: "graphite",
@@ -1314,7 +1386,6 @@ function doPost(e) {
         }
       ];
 
-      /* ==================== 音效系統 ==================== */
       const SoundFX = (() => {
         let ctx = null;
         let muted = false;
@@ -1383,7 +1454,6 @@ function doPost(e) {
         };
       })();
 
-      /* ==================== 彩帶動畫 ==================== */
       const ConfettiFX = (() => {
         const canvas = document.getElementById("confettiCanvas");
         const ctx = canvas.getContext("2d");
@@ -1454,10 +1524,6 @@ function doPost(e) {
         return copy;
       }
 
-      function pickRandomDigits(count) {
-        return shuffle(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]).slice(0, count);
-      }
-
       function getMineralById(id) {
         return MINERALS_DB.find(m => m.id === id) || MINERALS_DB[0];
       }
@@ -1469,122 +1535,163 @@ function doPost(e) {
         return `${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
       }
 
-      /* ==================== 隨機礦物題目產生器（不直接透漏答案） ==================== */
+      function assignRandomOptionCodes(optionLabels) {
+        const digits = shuffle(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]);
+        const shuffledLabels = shuffle(optionLabels);
+        return shuffledLabels.map((label, idx) => ({
+          label,
+          code: digits[idx]
+        }));
+      }
+
+      function buildStageFromCluePairs(config) {
+        const shuffledCluePairs = shuffle(config.cluePairs);
+        const optionPool = assignRandomOptionCodes(config.allOptionLabels);
+        const answerCode = shuffledCluePairs.map(pair => {
+          const found = optionPool.find(o => o.label === pair.targetLabel);
+          return found ? found.code : "0";
+        }).join("");
+
+        return {
+          id: config.id,
+          type: config.type,
+          title: config.title,
+          story: config.story,
+          specimens: config.showSpecimens
+            ? shuffledCluePairs.map((pair, idx) => ({
+                mineral: getMineralById(pair.mineralId),
+                label: `標本 ${idx + 1}`
+              }))
+            : [],
+          clues: shuffledCluePairs.map((pair, idx) => `線索 ${idx + 1}：${pair.clue}`),
+          clueCount: shuffledCluePairs.length,
+          optionPool,
+          answer: answerCode
+        };
+      }
+
       function buildRandomizedSessionStages() {
-        // 第 1 類：三張礦物標本觀察（3 碼隨機密碼）
-        const s1Items = shuffle([
-          {
-            mineralId: "graphite",
-            clue: "黑色，硬度 1～2，具金屬光澤與黑色條痕，常用作鉛筆筆心與電池電極"
-          },
-          {
-            mineralId: "sulfur",
-            clue: "多呈黃色，具松脂光澤與白色條痕，常見於火山噴氣孔附近，可製火藥與火柴"
-          },
-          {
-            mineralId: "talc",
-            clue: "蘋果綠、灰或銀白色，珍珠或油脂光澤，觸感滑順，可作爽身粉與陶瓷原料"
-          }
-        ]);
-        const s1Digits = pickRandomDigits(3);
-        const stage1 = {
+        const stage1 = buildStageFromCluePairs({
           id: "mineral_observe_3",
-          type: "數字密碼鎖・標本觀察",
-          mode: "digits",
+          type: "3 位密碼鎖・標本與性質",
           title: "礦物標本室・外觀與光澤鎖",
-          story: "觀察三張礦物照片與線索，推敲並輸入 3 位數字密碼。",
-          specimens: s1Items.map((it, idx) => ({
-            mineral: getMineralById(it.mineralId),
-            label: `標本 ${idx + 1}`
-          })),
-          clues: s1Items.map((it, idx) => `線索 ${idx + 1}：${it.clue}`),
-          answer: s1Digits.join("")
-        };
+          story: "觀察標本並依序點選線索 1～3 對應的礦物選項，組成 3 位密碼！",
+          showSpecimens: true,
+          cluePairs: [
+            {
+              mineralId: "graphite",
+              targetLabel: "石墨",
+              clue: "黑色，硬度 1～2，具金屬光澤與黑色條痕，常用作鉛筆筆心與電池電極"
+            },
+            {
+              mineralId: "sulfur",
+              targetLabel: "硫磺",
+              clue: "多呈黃色，具松脂光澤與白色條痕，常見於火山噴氣孔附近，可製火藥與火柴"
+            },
+            {
+              mineralId: "talc",
+              targetLabel: "滑石",
+              clue: "蘋果綠、灰或銀白色，珍珠或油脂光澤，觸感滑順，可作爽身粉與陶瓷原料"
+            }
+          ],
+          allOptionLabels: ["石墨", "硫磺", "滑石", "石英", "雲母", "方解石"]
+        });
 
-        // 第 2 類：課本 3-2 岩石與礦物組成推理（4 碼隨機密碼）
-        const s2Items = shuffle([
-          "由同一種或一種以上的礦物組合而成，是礦物的集合體（岩石）",
-          "石灰岩主要由哪一種礦物所組成？（方解石）",
-          "外形常呈六角柱狀、兩端六角錐，具玻璃光澤，可用於石英鐘錶與玻璃（石英）",
-          "呈板狀或片狀晶形，具電絕緣與耐火特性，亦為花岡岩組成礦物之一（雲母）"
-        ]);
-        const s2Digits = pickRandomDigits(4);
-        const stage2 = {
+        const stage2 = buildStageFromCluePairs({
           id: "mineral_textbook_4",
-          type: "數字密碼鎖・課本概念",
-          mode: "digits",
+          type: "4 位密碼鎖・課本概念",
           title: "地質研究室・組成概念鎖",
-          story: "根據課本「3-2 礦物」重點，推敲並輸入 4 位數字密碼。",
-          clues: s2Items.map((c, idx) => `線索 ${idx + 1}：${c}`),
-          answer: s2Digits.join("")
-        };
+          story: "依序點選線索 1～4 對應的正確答案選項，組合成 4 位密碼！",
+          showSpecimens: false,
+          cluePairs: [
+            {
+              targetLabel: "岩石",
+              clue: "由同一種或一種以上的礦物組合而成，是礦物的集合體"
+            },
+            {
+              targetLabel: "方解石",
+              clue: "常見乳白色顆粒狀，是組成石灰岩的主要礦物"
+            },
+            {
+              targetLabel: "石英",
+              clue: "外形常呈六角柱狀、兩端六角錐，具玻璃光澤，可用於石英鐘錶與玻璃"
+            },
+            {
+              targetLabel: "雲母",
+              clue: "呈板狀或片狀晶形，具電絕緣與耐火特性，亦為花岡岩組成礦物之一"
+            }
+          ],
+          allOptionLabels: ["岩石", "方解石", "石英", "雲母", "石墨", "滑石"]
+        });
 
-        // 第 3 類：礦物名稱文字鎖（每次隨機抽 1 題，題幹不直接出現答案）
-        const s3Pool = [
-          {
-            story: "此礦物外形呈六角柱狀，兩端常為六角錐，具有玻璃光澤與白色條痕，臺灣各地碎屑沉積岩皆可見，也可用於石英鐘錶、玻璃與飾品。",
-            clues: ["線索：六角柱狀、玻璃光澤，可用於鐘錶與玻璃。"],
-            answer: "石英",
-            choices: ["石英", "石墨", "滑石", "硫磺", "雲母", "方解石"]
-          },
-          {
-            story: "此礦物外形多為黃色（含雜質時可呈綠、灰或紅），具松脂光澤，常見於大屯火山區油坑與龜山島，可用於製造火藥、火柴與肥料。",
-            clues: ["線索：黃色、松脂光澤，大屯火山區常見。"],
-            answer: "硫磺",
-            choices: ["石英", "石墨", "滑石", "硫磺", "雲母", "方解石"]
-          },
-          {
-            story: "此礦物呈黑色，硬度僅 1～2，具有金屬光澤與黑色條痕，花蓮太魯閣至臺東一帶亦有分布，是鉛筆筆心與電池電極的重要原料。",
-            clues: ["線索：黑色、硬度 1～2、金屬光澤，鉛筆筆心原料。"],
-            answer: "石墨",
-            choices: ["石英", "石墨", "滑石", "硫磺", "雲母", "方解石"]
-          }
-        ];
-        const pickedS3 = shuffle(s3Pool)[0];
-        const stage3 = {
-          id: "mineral_name_text",
-          type: "文字銘牌鎖・礦物辨識",
-          mode: "text",
-          title: "鑑定實驗室・礦物銘牌鎖",
-          story: pickedS3.story,
-          clues: pickedS3.clues,
-          charChoices: shuffle(pickedS3.choices),
-          answer: pickedS3.answer
-        };
-
-        // 第 4 類：產地與用途配對鎖（3 碼隨機密碼）
-        const s4Items = shuffle([
-          "花蓮壽豐豐田與秀林西林可見，常製成爽身粉、陶瓷與化妝品原料",
-          "臺北大屯火山區大油坑、小油坑可見，可製硫酸、火柴與橡膠",
-          "南投集集大山、宜蘭南澳粉烏林與九份金瓜石可見，具玻璃光澤"
-        ]);
-        const s4Digits = pickRandomDigits(3);
-        const stage4 = {
+        const stage3 = buildStageFromCluePairs({
           id: "mineral_origin_3",
-          type: "數字密碼鎖・產地與用途",
-          mode: "digits",
+          type: "3 位密碼鎖・臺灣產地",
           title: "野外踏查室・產地線索鎖",
-          story: "依據礦物產地與用途線索，輸入 3 位數字密碼。",
-          clues: s4Items.map((c, idx) => `線索 ${idx + 1}：${c}`),
-          answer: s4Digits.join("")
-        };
+          story: "依序點選線索 1～3 描述的礦物選項，組合成 3 位密碼！",
+          showSpecimens: false,
+          cluePairs: [
+            {
+              targetLabel: "滑石",
+              clue: "花蓮壽豐鄉豐田與秀林鄉西林可見，常製成爽身粉、陶瓷與化妝品原料"
+            },
+            {
+              targetLabel: "石英",
+              clue: "南投集集大山、宜蘭南澳粉烏林與新北九份金瓜石可見，具玻璃光澤"
+            },
+            {
+              targetLabel: "硫磺",
+              clue: "臺北大屯火山區大油坑、小油坑與宜蘭龜山島可見，可製硫酸與火柴"
+            }
+          ],
+          allOptionLabels: ["滑石", "石英", "硫磺", "石墨", "雲母", "方解石"]
+        });
 
-        // 第 5 類：終極主控鎖（3 碼隨機密碼）
-        const s5Items = shuffle([
-          "組成石灰岩的主要礦物，常見乳白色或晶體形態",
-          "具片狀層理，可用於電絕緣、滅火劑與珠光顏料",
-          "具金屬光澤與黑色條痕，可用於坩堝與電池電極"
-        ]);
-        const s5Digits = pickRandomDigits(3);
-        const stage5 = {
+        const stage4 = buildStageFromCluePairs({
+          id: "mineral_usage_3",
+          type: "3 位密碼鎖・生活用途",
+          title: "材料實驗室・工業用途鎖",
+          story: "依序點選線索 1～3 屬於哪一種礦物的用途，組合成 3 位密碼！",
+          showSpecimens: false,
+          cluePairs: [
+            {
+              targetLabel: "雲母",
+              clue: "廣泛應用於建材、消防滅火劑、電絕緣材料與珠光顏料"
+            },
+            {
+              targetLabel: "石墨",
+              clue: "耐高溫可製坩堝，也能做電池電極、潤滑劑與鉛筆筆心"
+            },
+            {
+              targetLabel: "石英",
+              clue: "可製造石英鐘錶、壓力計、光學儀器、玻璃與飾品寶石"
+            }
+          ],
+          allOptionLabels: ["雲母", "石墨", "石英", "硫磺", "滑石", "方解石"]
+        });
+
+        const stage5 = buildStageFromCluePairs({
           id: "mineral_master_3",
-          type: "終極主控鎖・綜合推理",
-          mode: "digits",
+          type: "3 位終極主控鎖・綜合推理",
           title: "安全出口大門・最終主控鎖",
-          story: "最後一道關卡！整合課本礦物性質線索，輸入 3 位數字密碼開啟大門。",
-          clues: s5Items.map((c, idx) => `線索 ${idx + 1}：${c}`),
-          answer: s5Digits.join("")
-        };
+          story: "最後一道關卡！依序點選線索 1～3 的正確礦物選項，組合成 3 位密碼開啟大門！",
+          showSpecimens: false,
+          cluePairs: [
+            {
+              targetLabel: "方解石",
+              clue: "石灰岩的主要組成礦物，與水泥、建築原料關係密切"
+            },
+            {
+              targetLabel: "滑石",
+              clue: "外形呈板狀或塊狀，珍珠或油脂光澤，可作爽身粉與去汙粉"
+            },
+            {
+              targetLabel: "硫磺",
+              clue: "松脂光澤、條痕白色，可用來製造硫酸、肥料、殺蟲劑與輪胎"
+            }
+          ],
+          allOptionLabels: ["方解石", "滑石", "硫磺", "石墨", "石英", "雲母"]
+        });
 
         return shuffle([stage1, stage2, stage3, stage4, stage5]);
       }
@@ -1604,6 +1711,7 @@ function doPost(e) {
         student: { className: "", seatNumber: "", studentName: "" },
         stages: [],
         stageIndex: 0,
+        pickedChoices: [],
         score: 100,
         remainingSec: STAGE_SECONDS,
         totalElapsedSec: 0,
@@ -1663,12 +1771,14 @@ function doPost(e) {
         stageStory: document.getElementById("stageStory"),
         stageSpecimens: document.getElementById("stageSpecimens"),
         stageClues: document.getElementById("stageClues"),
+        undoChoiceBtn: document.getElementById("undoChoiceBtn"),
+        selectedSlotsBar: document.getElementById("selectedSlotsBar"),
+        optionCardsGrid: document.getElementById("optionCardsGrid"),
 
         lockScreen: document.getElementById("lockScreen"),
         lockInput: document.getElementById("lockInput"),
         lockFeedback: document.getElementById("lockFeedback"),
         numKeypad: document.getElementById("numKeypad"),
-        charKeypad: document.getElementById("charKeypad"),
         clearLockBtn: document.getElementById("clearLockBtn"),
         submitLockBtn: document.getElementById("submitLockBtn"),
 
@@ -1779,6 +1889,25 @@ function doPost(e) {
         `).join("");
       }
 
+      function renderSelectedSlots(stage) {
+        const count = stage.clueCount;
+        const pills = [];
+        for (let i = 0; i < count; i++) {
+          const picked = state.pickedChoices[i];
+          if (picked) {
+            pills.push(
+              `<span class="selected-slot-pill filled">線索 ${i + 1} → ${picked.label}（${picked.code}）</span>`
+            );
+          } else {
+            pills.push(
+              `<span class="selected-slot-pill">線索 ${i + 1} → 待選擇</span>`
+            );
+          }
+        }
+        el.selectedSlotsBar.innerHTML = pills.join("");
+        el.lockInput.value = state.pickedChoices.map(p => p.code).join("");
+      }
+
       function stopTimer() {
         if (state.timerId) {
           clearInterval(state.timerId);
@@ -1830,7 +1959,11 @@ function doPost(e) {
         el.numKeypad.querySelectorAll(".key-btn").forEach(btn => {
           btn.addEventListener("click", () => {
             SoundFX.click();
-            el.lockInput.value += btn.dataset.key;
+            const stage = state.stages[state.stageIndex];
+            const maxLen = stage ? stage.answer.length : 6;
+            if (el.lockInput.value.length < maxLen) {
+              el.lockInput.value += btn.dataset.key;
+            }
             el.lockInput.focus();
           });
         });
@@ -1838,6 +1971,7 @@ function doPost(e) {
 
       function renderStage(idx) {
         state.stageIndex = idx;
+        state.pickedChoices = [];
         const stage = state.stages[idx];
         const total = state.stages.length;
 
@@ -1866,30 +2000,35 @@ function doPost(e) {
           `<div class="clue-item">${c}</div>`
         ).join("");
 
-        if (stage.mode === "digits") {
-          el.numKeypad.style.display = "grid";
-          el.charKeypad.style.display = "none";
-          el.lockInput.placeholder = `輸入 ${stage.answer.length} 位密碼`;
-        } else {
-          el.numKeypad.style.display = "none";
-          el.charKeypad.style.display = "flex";
-          el.lockInput.placeholder = "輸入礦物名稱";
-          el.charKeypad.innerHTML = (stage.charChoices || []).map(name =>
-            `<button class="char-chip-btn" data-val="${name}" type="button">${name}</button>`
-          ).join("");
-          el.charKeypad.querySelectorAll(".char-chip-btn").forEach(b => {
-            b.addEventListener("click", () => {
-              SoundFX.click();
-              el.lockInput.value = b.dataset.val;
-            });
-          });
-        }
+        renderSelectedSlots(stage);
 
-        el.lockInput.value = "";
+        el.optionCardsGrid.innerHTML = stage.optionPool.map(opt => `
+          <button class="choice-card" data-code="${opt.code}" data-label="${opt.label}" type="button">
+            <span class="choice-code-badge">${opt.code}</span>
+            <span>${opt.label}</span>
+          </button>
+        `).join("");
+
+        el.optionCardsGrid.querySelectorAll(".choice-card").forEach(card => {
+          card.addEventListener("click", () => {
+            SoundFX.click();
+            if (state.pickedChoices.length < stage.clueCount) {
+              state.pickedChoices.push({
+                code: card.dataset.code,
+                label: card.dataset.label
+              });
+              renderSelectedSlots(stage);
+            } else {
+              el.lockFeedback.textContent = `本關只需選擇 ${stage.clueCount} 個答案，可按「退回上一格」或「清除重填」。`;
+              el.lockFeedback.className = "lock-feedback";
+            }
+          });
+        });
+
+        el.lockInput.placeholder = `輸入 ${stage.answer.length} 位密碼`;
         el.lockFeedback.textContent = "";
         el.lockFeedback.className = "lock-feedback";
         el.lockScreen.className = "lock-screen";
-        el.lockInput.focus();
 
         startStageTimer();
       }
@@ -1926,7 +2065,7 @@ function doPost(e) {
 
         const raw = el.lockInput.value.trim();
         if (!raw) {
-          el.lockFeedback.textContent = "請先輸入密碼！";
+          el.lockFeedback.textContent = "請先點選答案選項或輸入密碼！";
           el.lockFeedback.className = "lock-feedback";
           return;
         }
@@ -1952,7 +2091,7 @@ function doPost(e) {
           state.score = Math.max(0, state.score - PENALTY_PER_WRONG);
           el.hudScore.textContent = String(state.score);
           el.lockScreen.className = "lock-screen error shake";
-          el.lockFeedback.textContent = `密碼錯誤！扣除 ${PENALTY_PER_WRONG} 分，請重新推敲線索。`;
+          el.lockFeedback.textContent = `密碼錯誤！扣除 ${PENALTY_PER_WRONG} 分，請重新核對線索 1～${stage.clueCount} 的選項。`;
           el.lockFeedback.className = "lock-feedback";
           setTimeout(() => el.lockScreen.classList.remove("shake"), 400);
         }
@@ -2190,11 +2329,22 @@ function doPost(e) {
           startEscapeChallenge();
         });
 
+        el.undoChoiceBtn.addEventListener("click", () => {
+          SoundFX.click();
+          const stage = state.stages[state.stageIndex];
+          if (!stage || state.pickedChoices.length === 0) return;
+          state.pickedChoices.pop();
+          renderSelectedSlots(stage);
+        });
+
         el.clearLockBtn.addEventListener("click", () => {
           SoundFX.click();
+          const stage = state.stages[state.stageIndex];
+          state.pickedChoices = [];
           el.lockInput.value = "";
           el.lockFeedback.textContent = "";
           el.lockScreen.className = "lock-screen";
+          if (stage) renderSelectedSlots(stage);
           el.lockInput.focus();
         });
 
